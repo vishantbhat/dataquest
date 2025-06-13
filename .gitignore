@@ -1,0 +1,6 @@
+# Byte-compiled / virtual-env artefacts
+__pycache__/
+*.py[cod]
+venv/
+# VS Code user settings
+.vscode/

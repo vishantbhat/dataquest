@@ -1,6 +1,9 @@
-def greet(name: str) -> str:
-    return f"Hello, {name}! 👋"
+#TODO: create a dictrioary to hold stock of coffee and water
 
-if __name__ == "__main__":
-    user = input("Your name: ")
-    print(greet(user))
+#TODO: create a disctonary to keep coffee flavours and their measures
+
+#TODO: user input for flavour
+
+#TODO: ask for coins based no flavour
+
+#TODO: Validation - if not enough stock then return coins

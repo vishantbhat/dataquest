@@ -28,8 +28,10 @@ coffee_selection = {}
 coffee_selection = get_quantity(user_coffee_flavour,coffee_flavour)
 
 if is_enough_stock(coffee_selection,machine_stock) == "yes":
-    print ("Enough Stock")
+    print("Enough Stock")
+    # Ask for money
 else:
     print("Not enough")
+    # Sorry, cannot prepare
 #print (coffee_selection)
 # check stock availability

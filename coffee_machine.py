@@ -1,5 +1,5 @@
 # Dictionary to Hold Stock of Machine
-machine_stock = {"water" : 300 , "coffee" : 100 , "milk" : 200}
+machine_stock = {"water" : 3000 , "coffee" : 1000 , "milk" : 2000, "cost" : 0.0}
 
 # Dictionary to hold coffee flavour and recipe
 coffee_flavour = {
@@ -12,19 +12,27 @@ still_serving_coffee = True
 
 # Functionality to check if the stock is enough
 def is_enough_stock(in_dict_selection,in_dict_stock):
-    if (in_dict_stock["water"] >= in_dict_selection["water"]) \
-        and (in_dict_stock["coffee"] >= in_dict_selection["coffee"]) \
-        and (in_dict_stock["milk"] >= in_dict_selection["milk"]):
-
-        return True
-
+    if (in_dict_stock["water"] >= in_dict_selection["water"]):
+        return (True,(in_dict_stock["water"] - in_dict_selection["water"]))
     else:
-        return False
+        return (False,"water")
+
+    if (in_dict_stock["coffee"] >= in_dict_selection["coffee"]):
+        return (True,(in_dict_stock["coffee"] - in_dict_selection["coffee"]))
+    else:
+        return (False,"coffee")
+
+    if (in_dict_stock["milk"] >= in_dict_selection["milk"]):
+        return(True,(in_dict_stock["milk"] - in_dict_selection["milk"]))
+    else:
+        return (False,"milk")
+
 # Key Functionality - Now Make the final coffee
 def make_coffee(selected_flavour_dict,machine_stock_dict):
     machine_stock_dict["water"] =  machine_stock_dict.get("water") - selected_flavour_dict.get("water")
     machine_stock_dict["coffee"] =  machine_stock_dict.get("coffee") - selected_flavour_dict.get("coffee")
     machine_stock_dict["milk"] =  machine_stock_dict.get("milk") - selected_flavour_dict.get("milk")
+    machine_stock_dict["cost"] += selected_flavour_dict["cost"]
 
     # Return stock in the coffee machine
     return machine_stock_dict
@@ -33,8 +41,9 @@ def make_coffee(selected_flavour_dict,machine_stock_dict):
 def coffee_machine(user_coffee_flavour,in_dict_coffee_flav,in_dict_machine_stock):
     # Declare a new dictionary; and
     # get the quantity required for preparing a coffee using function get_quantity()
+    check_enough_stock = is_enough_stock(in_dict_coffee_flav[user_coffee_flavour],in_dict_machine_stock)
 
-    if is_enough_stock(in_dict_coffee_flav[user_coffee_flavour],in_dict_machine_stock) == True:
+    if check_enough_stock[0] == True:
 
         # Ask for money
         in_penny   = int(input("Insert Pennies  : "))
@@ -58,7 +67,7 @@ def coffee_machine(user_coffee_flavour,in_dict_coffee_flav,in_dict_machine_stock
                 print(f"\nHere's your {user_coffee_flavour}!Enjoy")
 
             else:
-                print(f"\nHere's your change of {tender_change}. Enjoy your {user_coffee_flavour}")
+                print(f"\nHere's your change of ${tender_change}. Enjoy your {user_coffee_flavour}")
 
         # Amount is less, ask customer to insert more coins
         else:
@@ -66,7 +75,7 @@ def coffee_machine(user_coffee_flavour,in_dict_coffee_flav,in_dict_machine_stock
 
     # Stock is insufficient to prepare coffee
     else:
-        print ("\nThere is no enough stock for a coffee, reselect")
+        print (f"\nThere is no enough stock of {check_enough_stock[1]}.Please rselect another flavour")
 
 # Enclose the program in while loop
 # Exit program when Still Serving Coffee = False
@@ -82,7 +91,7 @@ while still_serving_coffee:
 
     # Check coffee machine stock
     elif user_selection == "report":
-        print(f'\nWater: {machine_stock["water"]} \nMilk: {machine_stock["milk"]} \nCoffee: {machine_stock["coffee"]} \n')
+        print(f'\nWater: {machine_stock["water"]} \nMilk: {machine_stock["milk"]} \nCoffee: {machine_stock["coffee"]} \nAmount: ${machine_stock["cost"]}')
 
     # Make coffee
     else:

@@ -29,6 +29,11 @@ def make_coffee(selected_flavour_dict,machine_stock_dict):
 user_coffee_flavour = input("What would you like? (expresso/latte/cappuccino): ")
 print (user_coffee_flavour)
 
+###########################
+# Create statements for OFF and REPORT
+#####################
+
+#TODO: ADD While Loop
 # Declare a new dictionary; and
 # get the quantity required for preparing a coffee using function get_quantity()
 coffee_selection = {}
